@@ -33,3 +33,14 @@ Shaun: 2. Can drive a autorickshaw -- answer: didn't break production code
 Sheldon: 3. Been an extra for a Netflix show -- answer: haven't had Chipotle
 Siddhi: Don't hold grudges -- 
 
+#Siddhi M Pandit 
+1. I have a cat.
+2. I try being nice to people after knowing the truth & don't hold grudges.
+3. I paint a lot since I was a kid but haven't attended drawing class.
+
+#Guess -
+Pradnya: 'I love chai' -- WRONG
+Sheldon: 'I have been extra for a Netflix show' -- WRONG+
+Shaun: 'I never broke production level code' -- CORRECT
+Gurpreet: 'I have gone sky-diving' -- CORRECT
+
