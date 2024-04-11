@@ -44,3 +44,15 @@ Sheldon: 'I have been extra for a Netflix show' -- WRONG+
 Shaun: 'I never broke production level code' -- CORRECT
 Gurpreet: 'I have gone sky-diving' -- CORRECT
 
+
+# Shaun Lewis
+1. I play soccer and volleyball
+2. I drove an autorickshaw once 
+3. I never broke production code
+
+# Guess -
+Pradnya - you love chai
+Gurpreet - basketball for 20 years
+Sheldon - didnt sleep for 5 days
+Siddhi - hold grudges
+
