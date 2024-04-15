@@ -29,6 +29,10 @@ cd server
  ```
 
 ``` 
+npm install
+ ```
+
+``` 
 npm run dev
  ```
 
@@ -38,6 +42,9 @@ This runs on `localhost:5000`
 
 ``` 
 cd server
+ ```
+``` 
+npm install
  ```
 ``` 
 npm run dev
