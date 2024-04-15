@@ -20,3 +20,28 @@
 - [Unit Testing and Code Coverage Tool](https://docs.google.com/document/d/113U6oM9YaBbzO5c1PVBiJ9UVVTmbGOan_VyP0AbqPeA/edit?usp=sharing)
 
 - [Executive Summary of Unit Testing and Code Coverage Tool](https://docs.google.com/document/d/1htD-W2xLhKdq1PixiD-gHDnAJ-LUnG2rbA3g7b6GdX4/edit?usp=sharing)
+
+
+ ## Start Backend Server
+
+``` 
+cd server
+ ```
+
+``` 
+npm run dev
+ ```
+
+This runs on `localhost:5000`
+
+  ## Start React app
+
+``` 
+cd server
+ ```
+``` 
+npm run dev
+ ```
+
+This runs on `localhost:3000`
+
