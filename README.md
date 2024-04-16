@@ -41,13 +41,13 @@ This runs on `localhost:5000`
   ## Start React app
 
 ``` 
-cd server
+cd client
  ```
 ``` 
 npm install
  ```
 ``` 
-npm run dev
+npm start
  ```
 
 This runs on `localhost:3000`
