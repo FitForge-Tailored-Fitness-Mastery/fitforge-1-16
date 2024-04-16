@@ -21,6 +21,8 @@
 
 - [Executive Summary of Unit Testing and Code Coverage Tool](https://docs.google.com/document/d/1htD-W2xLhKdq1PixiD-gHDnAJ-LUnG2rbA3g7b6GdX4/edit?usp=sharing)
 
+- [Fitforge - Database setup](https://docs.google.com/document/d/1RX_yGHt6HRFlrrjEQ4bPMTxsbPoNn3E8pXgZh-zPi9g/edit?usp=sharing)
+
 
  ## Start Backend Server
 
@@ -51,4 +53,16 @@ npm start
  ```
 
 This runs on `localhost:3000`
+
+## Setup .env file
+
+Create a `.env` file inside `server` folder and add the below fields to it. This is used to connect to the database.
+
+```
+DB_HOST=...
+DB_USER=...
+DB_PASSWORD=...
+DB_DATABASE=...
+DB_PORT=...
+```
 
