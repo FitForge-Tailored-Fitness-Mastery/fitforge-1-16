@@ -35,14 +35,22 @@ const signup = async (req, res) => {
       INSERT INTO clients (fname, lname, email, role, is_assigned_trainer, password, created_at, updated_at)
       VALUES (?, ?, ?, 'client', 0, ?, NOW(), NOW())
     `;
-
     
-    const result = await connection.query(query, [firstName, lastName, email, hashedPassword]);
+    await new Promise((resolve, reject) => {
+      connection.query(query, [firstName, lastName, email, hashedPassword], (error, results, fields) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+      
+      res.status(201).json({ message: 'User created successfully' });
           
-    res.status(201).json({ message: 'User created successfully' });
-  } catch (error) {
-    console.error('Error during signup:', error);
-    res.status(500).json({ error: 'Internal server error' });
+  } catch (err) {
+    console.error('Error during signup:', err);
+    res.status(500).json({ error: 'Error inserting user into the database' });
   }
 };
 
