@@ -1,8 +1,8 @@
 import renderer from 'react-test-renderer';
 import React from 'react';
-import clientHome from '../clientHome';
+import ClientHome from '../components/ClientHome';
 
 it('testing the testing feature', () => {
-    const tree = renderer.create(<clientHome />).toJSON();
+    const tree = renderer.create(<ClientHome />).toJSON();
     expect(tree).toMatchSnapshot();
 });
