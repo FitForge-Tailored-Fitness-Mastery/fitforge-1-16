@@ -1,5 +1,5 @@
 import React from 'react';
-import './ClientHome.css'; 
+import './clientHome.css'; 
 
 const ProgressChart = () => {
   return (

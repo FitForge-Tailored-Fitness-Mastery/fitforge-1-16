@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
-import './ClientHome.css'; // External CSS for workout summary
+import './clientHome.css'; // External CSS for workout summary
 
 const Navigation = () => {
   return (

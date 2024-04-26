@@ -1,14 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import axios from 'axios'; // Mock axios for testing
-
-import Login from '../components/Login/Login';
 
 jest.mock('axios');
 
 
-import Index from '../components/Index';
+import Index from '../components/Index/Index';
 
 describe('Index component', () => {
   test('renders child components', () => {

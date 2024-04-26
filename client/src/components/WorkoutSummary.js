@@ -1,5 +1,5 @@
 import React from 'react';
-import './ClientHome.css'; // External CSS for workout summary
+import './clientHome.css'; // External CSS for workout summary
 
 const WorkoutSummary = () => {
   return (

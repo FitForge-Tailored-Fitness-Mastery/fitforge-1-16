@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
-import './ClientHome.css'; // External CSS for upcoming workouts
+import './clientHome.css'; // External CSS for upcoming workouts
 
 const UpcomingWorkouts = () => {
   return (
