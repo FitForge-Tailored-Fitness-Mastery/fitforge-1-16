@@ -1,6 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import * as  clientController from './Controllers/clientsController.js'
+import clientRouter from './routes/clientRoutes.js'; // Rename the import to clientRouter
+
 
 dotenv.config();
 
@@ -13,6 +15,7 @@ app.use(express.json());
 
 //creates an endpoint for the route /clients
 app.get('/clients', clientController.getClients);
+app.use('/client', clientRouter);
 
 // console.log that your server is up and running
 app.listen(PORT, () => {
