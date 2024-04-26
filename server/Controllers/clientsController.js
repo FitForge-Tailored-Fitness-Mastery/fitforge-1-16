@@ -96,3 +96,47 @@ const signup = async (req, res) => {
 
 
 export { getClients, signup, login };
+
+const getClientById = async (req, res) => {
+  const connection = await getConnection();
+  const client_id = req.params.id;
+  connection.query(`SELECT c.*, tm.trainer_id FROM clients c left join 
+      trainers_mapping tm ON tm.client_id = c.client_id 
+      WHERE tm.client_id = ? and tm.dropped = 0`
+  , [client_id], (error, results, fields) => {
+    if (error) {
+        console.error('Error querying the database: ', error);
+        res.status(500).send('Error retrieving data from the database');
+        return;
+    }
+    if (results.length === 0) 
+    {
+      res.status(404).send('Client not found');
+      return;
+    }    
+    res.json(results[0]);
+});
+};
+
+const getTrainerDetailsByTrainerId = async (req, res) => {
+  const trainer_id = req.params.id;
+  const connection = await getConnection();
+  const query = `
+    SELECT c.* FROM clients c
+    WHERE c.client_id = ?
+  `;
+  connection.query(query, [trainer_id], (error, results) => {
+    if (error) {
+      console.error('Error querying the database: ', error);
+      res.status(500).send('Error retrieving trainer data from the database');
+      return;
+    }
+    if (results.length === 0) {
+      res.status(404).send('Trainer not found for the client');
+      return;
+    }
+    res.json(results[0]); // Send back the trainer details
+  });
+};
+
+export { getClients, getClientById, getTrainerDetailsByTrainerId };

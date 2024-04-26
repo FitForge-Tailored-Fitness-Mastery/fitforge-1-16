@@ -4,70 +4,29 @@ exports[`testing the testing feature 1`] = `
 <div
   className="App"
 >
-  <div
-    className="login-container"
+  <header
+    className="App-header"
   >
-    <div
-      className="login-box"
+    <img
+      alt="logo"
+      className="App-logo"
+      src="logo.svg"
+    />
+    <p>
+      Edit 
+      <code>
+        src/App.js
+      </code>
+       and save to reload.
+    </p>
+    <a
+      className="App-link"
+      href="https://reactjs.org"
+      rel="noopener noreferrer"
+      target="_blank"
     >
-      <form
-        className="login-form"
-        onSubmit={[Function]}
-      >
-        <h1>
-          Login
-        </h1>
-        <div
-          className="input-group"
-        >
-          <label
-            htmlFor="email"
-          >
-            Username
-          </label>
-          <input
-            id="email"
-            onChange={[Function]}
-            placeholder="username@email.com"
-            type="email"
-            value=""
-          />
-        </div>
-        <div
-          className="input-group"
-        >
-          <label
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            id="password"
-            onChange={[Function]}
-            placeholder="********"
-            type="password"
-            value=""
-          />
-        </div>
-        <button
-          className="login-button"
-          type="submit"
-        >
-          Login
-        </button>
-        <p
-          className="signup-link"
-        >
-          New user? 
-          <a
-            href="/signup"
-            onClick={[Function]}
-          >
-            Sign up
-          </a>
-        </p>
-      </form>
-    </div>
-  </div>
+      Learn React
+    </a>
+  </header>
 </div>
 `;
