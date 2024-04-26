@@ -6,16 +6,20 @@ import * as  workoutController from './Controllers/workoutController.js'
 
 
 dotenv.config();
+import cors from 'cors';
 
 const app = express();
-
-//Set the port that you want the server to run on
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json());
 
 //creates an endpoint for the route /clients
 app.get('/clients', clientController.getClients);
+// Middleware
+app.use(cors());
+app.use(express.json()); // Parses incoming requests with JSON payloads
+
+// Endpoint for /signup
+app.post('/signup', clientController.signup);
 
 app.get('/client/:clientId/workouts',workoutController.getClientWorkouts );
 
@@ -23,3 +27,7 @@ app.get('/client/:clientId/workouts',workoutController.getClientWorkouts );
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
+
+
+// Endpoint for /login
+app.post('/login', clientController.login);
