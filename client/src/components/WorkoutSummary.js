@@ -3,7 +3,7 @@ import './ClientHome.css'; // External CSS for workout summary
 
 const WorkoutSummary = () => {
   return (
-    <div className="summary">
+    <div className="summary" data-testid="workout-summary">
       <div className='topspace'> </div>
       <div className="flex-container-summary" id="row1">
         <div className='smallDiv'>

@@ -5,7 +5,7 @@ import './ClientHome.css'; // External CSS for upcoming workouts
 
 const UpcomingWorkouts = () => {
   return (
-    <div className="upcomingWorkout">
+    <div className="upcomingWorkout" data-testid="upcoming-workouts">
       <div className="uw-heading">
       <FontAwesomeIcon icon={faCalendar} />  Upcoming Workouts
       </div>

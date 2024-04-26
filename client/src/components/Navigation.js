@@ -5,7 +5,7 @@ import './ClientHome.css'; // External CSS for workout summary
 
 const Navigation = () => {
   return (
-    <nav className="navbar">
+    <nav className="navbar" data-testid="navigation">
       <a href="workoutHistory.html" className="navbar-link">
         <FontAwesomeIcon icon={faDumbbell} />
       </a>
