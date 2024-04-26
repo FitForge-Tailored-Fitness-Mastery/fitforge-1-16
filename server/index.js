@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
 //creates an endpoint for the route /clients
-app.get('/clients', clientController.getClients);
+app.use('/clients', clientRouter);
 app.use('/client', clientRouter);
 
 // console.log that your server is up and running
