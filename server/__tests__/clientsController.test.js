@@ -5,6 +5,8 @@ import { getConnection } from '../databaseConn';
 
 jest.mock('../databaseConn');
 
+
+
 describe('clientsController', () => {
     describe('getClients', () => {
       const mockResults = [
@@ -55,6 +57,26 @@ describe('clientsController', () => {
   
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.send).toHaveBeenCalledWith('Error retrieving data from the database');
+      });
+
+      it('should return 404 if no clients are found', async () => {
+        const req = { params: { clientId: '0' } };
+        const res = {
+          status: jest.fn().mockReturnThis(),
+          send: jest.fn(),
+          json: jest.fn(),
+        };
+      
+        getConnection.mockResolvedValueOnce({
+          query: jest.fn().mockImplementation((_, callback) => {
+            callback(null, [], null);
+          }),
+        });
+      
+        await getClients(req, res);
+      
+        expect(res.status).toHaveBeenCalledWith(404);
+        expect(res.send).toHaveBeenCalledWith('No clients found');
       });
     });
   });

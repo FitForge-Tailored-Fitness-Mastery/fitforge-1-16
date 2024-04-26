@@ -6,6 +6,7 @@ import TrainerProfile from './components/TrainerProfile/TrainerProfile';
 //import TrainerProfile from './components/TrainerProfile/TrainerProfile';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+import logo from './logo.svg';
 import './App.css';
 
 

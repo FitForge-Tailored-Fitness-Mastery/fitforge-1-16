@@ -5,12 +5,18 @@ const getClients = async (req, res) => {
   const connection = await getConnection();
   connection.query('SELECT * FROM clients', (error, results, fields) => {
     if (error) {
-        console.error('Error querying the database: ', error);
-        res.status(500).send('Error retrieving data from the database');
-        return;
+      console.error('Error querying the database: ', error);
+      res.status(500).send('Error retrieving data from the database');
+      return;
     }
+
+    if (results.length === 0) {
+      res.status(404).send('No clients found');
+      return;
+    }
+
     res.json(results);
-});
+  });
 };
 
 const login = async (req, res) => {
@@ -95,8 +101,6 @@ const signup = async (req, res) => {
 };
 
 
-export { getClients, signup, login };
-
 const getClientById = async (req, res) => {
   const connection = await getConnection();
   const client_id = req.params.id;
@@ -139,4 +143,4 @@ const getTrainerDetailsByTrainerId = async (req, res) => {
   });
 };
 
-export { getClients, getClientById, getTrainerDetailsByTrainerId };
+export { getClients, getClientById, getTrainerDetailsByTrainerId, signup, login };
