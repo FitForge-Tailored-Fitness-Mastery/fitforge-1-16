@@ -1,6 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import * as  clientController from './Controllers/clientsController.js'
+import * as  workoutController from './Controllers/workoutController.js'
+
+
 
 dotenv.config();
 import cors from 'cors';
@@ -18,12 +21,9 @@ app.use(express.json()); // Parses incoming requests with JSON payloads
 // Endpoint for /signup
 app.post('/signup', clientController.signup);
 
+app.get('/client/:clientId/workouts',workoutController.getClientWorkouts );
 
-// Existing /api route
-app.get('/api', (req, res) => {
-  res.json({ message: 'Hello from ExpressJS' });
-});
-
+// console.log that your server is up and running
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
