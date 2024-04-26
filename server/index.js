@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import * as  clientController from './Controllers/clientsController.js'
-import clientRouter from './routes/clientRoutes.js'; // Rename the import to clientRouter
+import * as  workoutController from './Controllers/workoutController.js'
+
 
 
 dotenv.config();
@@ -14,8 +15,9 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
 //creates an endpoint for the route /clients
-app.use('/clients', clientRouter);
-app.use('/client', clientRouter);
+app.get('/clients', clientController.getClients);
+
+app.get('/client/:clientId/workouts',workoutController.getClientWorkouts );
 
 // console.log that your server is up and running
 app.listen(PORT, () => {
