@@ -4,13 +4,13 @@ body{
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-/* Styles for the navigation bar */
+/* Styles for the Navigation.js */
 nav{
     background-color: #fdd673;
     color: white;
     display: flex;
     justify-content: space-around;
-    align-items: center;           /* Vertical alignment */
+    align-items: center;
     padding: 0px;
     position:fixed;
     bottom: 0;
@@ -30,24 +30,28 @@ nav{
     color: black;
 }
 
+.navbar-link:active {
+    color: black;
+}
 
-/* Styles for the Workout Summary section*/
+
+/* Styles for the WorkoutSummary.js */
 #summary{
-    background-color: #1f1e1e;
+    /* background-color: #1f1e1e; */
     color: black;
     padding: 0;
     margin: 10px;
     justify-content: space-around;
-    align-items: center;           /* Vertical alignment */
+    align-items: center;
 }
 
 .topspace{
-    height: 50px;
+    height: 30px;
 }
 
 .flex-container-summary {
     display: flex;
-    background-color: #3e3e3e;
+    /* background-color: #3e3e3e; */
     width: auto;
     height: 100px;
     padding: 0;
@@ -55,7 +59,7 @@ nav{
     align-items: center; 
 }
 
-.flex-container-summary > div {
+.smallDiv{
     background-color: #f1f1f1;
     margin: 2px;
     padding: 20px;
@@ -64,6 +68,11 @@ nav{
     width: inherit;
     align-items: center;
     border-radius: 5px;
+}
+
+#zeroes{
+    font-size: 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #row1{
@@ -77,23 +86,27 @@ nav{
 }
 
 
-/* Styles for the Progress Chart section*/
-#chart{
-    background-color: rgb(146, 146, 146);
+/* Styles for the ProgressChart.js */
+.chart{
     height: 500 px;
-    width: 500px;
-    
+    width: auto;
+    padding: 1px;
+    display: flex;
+    justify-content: center; 
+    align-items:start;
 }
 
-#chart > graph{
-    align-content:flex-start;
+#graph{
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 5px;
 }
 
 
-/* Styles for the Upcoming Workout section*/
+/* Styles for the UpcomingWorkout.js */
 
 .upcomingWorkout{
-    background-color: #3e3e3e;
+    /* background-color: #3e3e3e; */
     color: #f1f1f1;
     padding: 20px;
     height: 500 px;
@@ -114,7 +127,7 @@ nav{
 .flex-upcoming-workout-container {
     display: flex;
     flex-direction: column;
-    align-items:center; /* Align items vertically */
+    align-items:center; 
     border-radius: 5px;
     padding: 20px;
     margin: 0;
@@ -162,5 +175,6 @@ nav{
     align-content: center;
 }
 
-
-
+.bottomspace{
+    height: 50px;
+}

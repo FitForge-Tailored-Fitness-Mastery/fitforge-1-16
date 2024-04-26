@@ -1,10 +1,10 @@
 import React from 'react';
-import './clientHome.css'; 
+import './ClientHome.css'; 
 
 const ProgressChart = () => {
   return (
     <div className="chart">
-      <img id='graph' src="public/graph.jpg" alt="chartImage" />
+      <img id='graph' src="graph.jpg" alt="chartImage" />
     </div>
   );
 };
