@@ -27,8 +27,17 @@ const login = async (req, res) => {
 
     // Retrieve user from the clients table
     const query = `SELECT * FROM clients WHERE email = ?`;
-
-    const [users] = await connection.query(query, [email]);
+    const users = await new Promise((resolve, reject) => {
+      connection.query(query, [email], (error, results, fields) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+      
+    //const [users] = await connection.query(query, [email]);
    console.log(users);
     // Check if user exists
     if (users.length === 0) {
@@ -36,10 +45,10 @@ const login = async (req, res) => {
     }
 
     const user = users[0];
-
+    
     // Compare provided password with stored hashed password
     const isMatch = await bcrypt.compare(password, user.password);
-
+    
     if (!isMatch) {
       // Password does not match
       return res.status(401).json({ error: 'Password is incorrect' });
