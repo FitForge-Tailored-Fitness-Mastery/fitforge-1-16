@@ -1,7 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import * as  clientController from './Controllers/clientsController.js'
-import cors from 'cors';
 import * as  workoutController from './Controllers/workoutController.js'
 
 
