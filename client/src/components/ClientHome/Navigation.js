@@ -1,20 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
-import './clientHome.css'; // External CSS for workout summary
+import './ClientHome.css'; // External CSS for workout summary
 
 const Navigation = () => {
   return (
     <nav className="navbar" data-testid="navigation">
-      <a href="workoutHistory.html" className="navbar-link">
+
+      <Link to="/workout-history" className="navbar-link">
         <FontAwesomeIcon icon={faDumbbell} />
-      </a>
-      <a href="#" className="navbar-link active">
+      </Link>
+
+      <Link to="/client-home" className="navbar-link active">
         <FontAwesomeIcon icon={faHome} />
-      </a>
-      <a href="profile.html" className="navbar-link">
+      </Link>
+
+      <Link to="/profile" className="navbar-link">
         <FontAwesomeIcon icon={faUser} />
-      </a>
+      </Link>
+
     </nav>
   );
 };
