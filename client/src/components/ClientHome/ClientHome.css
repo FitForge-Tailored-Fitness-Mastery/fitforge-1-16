@@ -1,0 +1,181 @@
+body{
+    background-color: #1f1e1e;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Styles for the Navigation.js */
+nav{
+    background-color: #fdd673;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0px;
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.navbar-link{
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 2.5rem;
+    transition: color 0.3s;
+}
+
+.navbar-link:hover {
+    color: black;
+}
+
+.navbar-link:active {
+    color: black;
+}
+
+
+/* Styles for the WorkoutSummary.js */
+#summary{
+    /* background-color: #1f1e1e; */
+    color: black;
+    padding: 0;
+    margin: 10px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.topspace{
+    height: 30px;
+}
+
+.flex-container-summary {
+    display: flex;
+    /* background-color: #3e3e3e; */
+    width: auto;
+    height: 100px;
+    padding: 0;
+    justify-content: space-around;
+    align-items: center; 
+}
+
+.smallDiv{
+    background-color: #f1f1f1;
+    margin: 2px;
+    padding: 20px;
+    text-align: center;
+    font-size: 10px;
+    width: inherit;
+    align-items: center;
+    border-radius: 5px;
+}
+
+#zeroes{
+    font-size: 1.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#row1{
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+#row2{
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+
+/* Styles for the ProgressChart.js */
+.chart{
+    height: 500 px;
+    width: auto;
+    padding: 1px;
+    display: flex;
+    justify-content: center; 
+    align-items:start;
+}
+
+#graph{
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+
+/* Styles for the UpcomingWorkout.js */
+
+.upcomingWorkout{
+    /* background-color: #3e3e3e; */
+    color: #f1f1f1;
+    padding: 20px;
+    height: 500 px;
+    width: auto;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.uw-heading{
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    text-align: left;
+}
+
+
+.flex-upcoming-workout-container {
+    display: flex;
+    flex-direction: column;
+    align-items:center; 
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0;
+
+}
+
+.flex-container-workout{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    border: solid 1px #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.column1 > img{
+    background-color: green;
+    flex-grow: 1; 
+    margin: 0;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+  
+.column2 {
+    color: f1f1f1;
+    flex-grow: 8; 
+    flex-direction: column;
+    padding: 0px;
+    margin-left: 5px;
+    align-content:center;
+}
+  
+.column2 > .row1 {
+    font-size: 1.3rem;
+    align-content: center;
+    margin-bottom: 9px;
+}
+
+.column2 > .row2{
+    font-size: 1rem;
+    align-content: center;
+}
+
+.bottomspace{
+    height: 50px;
+}

@@ -23,6 +23,8 @@ app.post('/signup', clientController.signup);
 
 app.get('/client/:clientId/workouts',workoutController.getClientWorkouts );
 
+app.get('/client/:clientId/sessions',workoutController.getClientFutureSessions );
+
 // console.log that your server is up and running
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

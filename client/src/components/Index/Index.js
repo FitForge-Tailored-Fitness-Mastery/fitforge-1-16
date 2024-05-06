@@ -1,8 +1,10 @@
 import React from 'react';
-import Navigation from '../../components/Navigation';
-import WorkoutSummary from '../../components/WorkoutSummary';
-import ProgressChart from '../../components/ProgressChart';
-import UpcomingWorkouts from '../../components/UpcomingWorkouts';
+import ClientHome from '../ClientHome/ClientHome';
+import Navigation from '../../components/ClientHome/Navigation';
+import WorkoutSummary from '../../components/ClientHome/WorkoutSummary';
+import ProgressChart from '../../components/ClientHome/ProgressChart';
+import UpcomingWorkouts from '../../components/ClientHome/UpcomingWorkouts';
+
 //import logo from './logo.svg';
 import './Index.css'; // External CSS for overall styling
 
