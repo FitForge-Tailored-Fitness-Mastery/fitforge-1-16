@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './TrainerProfile.css';
+import trainerImg from './trainerprofileimg.png'; // Import the trainer image
 
 const TrainerProfile = () => {
   const [trainerDetails, setTrainerDetails] = useState(null);
@@ -22,7 +23,6 @@ const TrainerProfile = () => {
         setError(error.message);
       }
     };
-
     fetchTrainerDetails();
   }, [clientId]); // Dependency array includes clientId to refetch when it changes
 
@@ -38,7 +38,9 @@ const TrainerProfile = () => {
     <div className="trainer-profile-container">
       <div className="trainer-profile-header">
         {/* Image and name of the trainer */}
-        <img src={trainerDetails?.imageUrl} alt={trainerDetails?.fname} className="trainer-profile-photo" />
+        <div className="trainer-profile-picture-container">
+          <img src={trainerImg} alt={trainerDetails?.fname} className="trainer-profile-photo" />
+        </div>
         <h2 className="trainer-profile-name">{trainerDetails?.fname} {trainerDetails?.lname}</h2>
       </div>
       <div className="trainer-profile-details">

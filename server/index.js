@@ -30,6 +30,8 @@ app.post('/signup', clientController.signup);
 
 app.get('/client/:clientId/workouts',workoutController.getClientWorkouts );
 
+app.patch('/client/:clientId/', clientController.updateClientById );
+
 // console.log that your server is up and running
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

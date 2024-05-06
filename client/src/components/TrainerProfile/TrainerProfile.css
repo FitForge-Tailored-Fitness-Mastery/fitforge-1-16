@@ -1,62 +1,73 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
 .trainer-profile-container {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-    font-family: Arial, sans-serif;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .trainer-profile-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .trainer-profile-picture-container {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .trainer-profile-photo {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-  }
-  
-  .trainer-profile-name {
-    color: gold;
-  }
-  
-  .trainer-profile-details {
-    width: 100%;
-    text-align: left;
-    font-size: 0.9rem;
+  max-width: 400px;
+  min-height: 100vh;
+  background-color: #333;
+  color: white;
+  font-family: Arial, sans-serif;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.trainer-profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.trainer-profile-picture-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.trainer-profile-photo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.trainer-profile-name {
+  color: gold;
+}
+
+.trainer-profile-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  width: 100%;
+  background-color: #555;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.trainer-profile-details p {
+  margin: 5px 0;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 480px) {
+  .trainer-profile-container {
+    margin: 20px 10px;
     padding: 10px;
-    border-top: 1px solid #555;
   }
-  
-  .trainer-profile-details a {
-    color: gold;
-    text-decoration: none;
-  }
-  
-  .trainer-profile-details a:hover {
-    text-decoration: underline;
-  }
-  
-  .error {
-    color: red;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
+}
