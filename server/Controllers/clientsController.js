@@ -13,6 +13,7 @@ const getClients = async (req, res) => {
 });
 };
 
+
 // const login = async (req, res) => {
 //   const { email, password } = req.body;
 
@@ -80,7 +81,7 @@ const login = async (req, res) => {
 
     // Retrieve user from the clients table
     const query = `SELECT * FROM clients WHERE email = ?`;
-    const [users] = await new Promise((resolve, reject) => {
+    const users = await new Promise((resolve, reject) => {
       connection.query(query, [email], (error, results, fields) => {
         if (error) {
           reject(error);
@@ -89,6 +90,9 @@ const login = async (req, res) => {
         }
       });
     });
+      
+    //const [users] = await connection.query(query, [email]);
+   console.log(users);
 
     // Check if user exists
     if (users.length === 0) {
@@ -105,6 +109,7 @@ const login = async (req, res) => {
     }
 
     // Password matches
+
     console.log('Successful login');
     res.status(200).json({ message: 'User found and password is correct' });
   } catch (error) {
@@ -142,6 +147,7 @@ const signup = async (req, res) => {
           reject(error);
         } else {
           resolve(results);
+
           console.log('User inserted successfully with insertId:', results.insertId); // Add this line
         }
       });

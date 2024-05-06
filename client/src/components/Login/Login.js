@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './Login.css'; // Ensure you have a corresponding CSS file
+import { Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import './Login.css'; // Ensure you have a corresponding CSS file
+
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+  const navigate = useNavigate();
+
 
   const handleSubmitLogin = async (event) => {
     event.preventDefault();
@@ -22,6 +27,8 @@ const Login = () => {
       // Handle success here. If login is successful:
       // You might want to redirect the user to another page or
       // save the login token in local storage or context for state management.
+      navigate('/client-home');
+
     } catch (error) {
       console.error('Login error:', error.response.data);
       // Handle errors here. You may want to show the user a message explaining the login failed
