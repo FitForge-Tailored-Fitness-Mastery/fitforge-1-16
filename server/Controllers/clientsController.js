@@ -13,6 +13,60 @@ const getClients = async (req, res) => {
 });
 };
 
+
+// const login = async (req, res) => {
+//   const { email, password } = req.body;
+
+//   // Validate the input
+//   if (!email || !password) {
+//     return res.status(400).json({ error: 'Email and password are required' });
+//   }
+
+//   try {
+//     // Get database connection
+//     const connection = await getConnection();
+
+//     // Retrieve user from the clients table
+//     const query = `SELECT * FROM clients WHERE email = ?`;
+//     const users = await new Promise((resolve, reject) => {
+//       connection.query(query, [email], (error, results, fields) => {
+//         if (error) {
+//           reject(error);
+//         } else {
+//           resolve(results);
+//         }
+//       });
+//     });
+      
+//     //const [users] = await connection.query(query, [email]);
+//    console.log(users);
+//     // Check if user exists
+//     if (users.length === 0) {
+//       console.log('users array:', users);
+//       return res.status(401).json({ error: 'No user found with this email' });
+//     }
+
+//     const user = users[0];
+//     console.log('user object:', user);
+//     // Compare provided password with stored hashed password
+//     const isMatch = await bcrypt.compare(password, user.password);
+    
+//     if (!isMatch) {
+//       // Password does not match
+//       console.log('isMatch:', isMatch);
+//       return res.status(401).json({ error: 'Password is incorrect' });
+//     }
+
+//     // Password matches
+//     console.log('Successful login');
+//     res.status(200).json({ message: 'User found and password is correct' });
+//   } catch (error) {
+//     console.error('Error during login:', error);
+//     res.status(500).json({ error: 'Internal server error' });
+//     console.error('Error during login:', error);
+//   }
+// };
+
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -39,22 +93,24 @@ const login = async (req, res) => {
       
     //const [users] = await connection.query(query, [email]);
    console.log(users);
+
     // Check if user exists
     if (users.length === 0) {
       return res.status(401).json({ error: 'No user found with this email' });
     }
 
     const user = users[0];
-    
+
     // Compare provided password with stored hashed password
     const isMatch = await bcrypt.compare(password, user.password);
-    
     if (!isMatch) {
       // Password does not match
       return res.status(401).json({ error: 'Password is incorrect' });
     }
 
     // Password matches
+
+    console.log('Successful login');
     res.status(200).json({ message: 'User found and password is correct' });
   } catch (error) {
     console.error('Error during login:', error);
@@ -91,6 +147,8 @@ const signup = async (req, res) => {
           reject(error);
         } else {
           resolve(results);
+
+          console.log('User inserted successfully with insertId:', results.insertId); // Add this line
         }
       });
     });

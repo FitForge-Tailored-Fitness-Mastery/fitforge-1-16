@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
+
 import './Signup.css'; // Make sure to create this CSS file
 
 const Signup = () => {
@@ -14,6 +15,7 @@ const Signup = () => {
   });
   
   const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,6 +34,7 @@ const Signup = () => {
       console.log(response.data);
       // Handle success (redirect or show a message)
       navigate('/client-home');
+
     } catch (error) {
       console.error('Signup error:', error.response.data);
       // Handle errors (show error message to user)
