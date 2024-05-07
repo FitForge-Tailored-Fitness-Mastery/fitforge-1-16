@@ -1,6 +1,6 @@
 // App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Profile from './components/Profile/Profile';
 import TrainerProfile from './components/TrainerProfile/TrainerProfile';
 import EditProfile from './components/Profile/EditProfile'
@@ -12,6 +12,11 @@ import WorkoutHistory from './components/WorkoutHistory/WorkoutHistory';
 import './App.css';
 
 
+const PrivateRoute = ({ children }) => {
+  const clientId = localStorage.getItem('clientId');
+  
+  return clientId ? children : <Navigate to="/" />;
+}
 
 const App = () => {
   return (
@@ -20,16 +25,16 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/index" element={<Index />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/trainerprofile/:clientId" element={<TrainerProfile />} />
-          <Route path="/edit-profile/:clientId" element={<EditProfile />} />
-          <Route path="/client-home" element={<ClientHome />} />
-          <Route path="/workout-history" element={<WorkoutHistory />} />
+          <Route path="/index" element={<PrivateRoute><Index /></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="/trainerprofile/:clientId" element={<PrivateRoute><TrainerProfile /></PrivateRoute>} />
+          <Route path="/edit-profile/:clientId" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
+          <Route path="/client-home" element={<PrivateRoute><ClientHome /></PrivateRoute>} />
+          <Route path="/workout-history" element={<PrivateRoute><WorkoutHistory /></PrivateRoute>} />
         </Routes>
       </div>
     </Router>
   );
-};;
+};
 
 export default App;

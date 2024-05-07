@@ -41,7 +41,7 @@ const Profile = ({ clientId }) => {
 
   const handleConfirmLogout = () => {
     setShowLogoutConfirmation(false);
-    // Here you would handle the actual logout process
+    localStorage.removeItem('clientId');
   };
 
   const handleEditProfile = () => {
