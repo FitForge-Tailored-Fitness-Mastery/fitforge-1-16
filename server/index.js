@@ -30,6 +30,8 @@ app.post('/signup', clientController.signup);
 
 app.get('/client/:clientId/workouts',workoutController.getClientWorkouts );
 
+app.get('/client/:clientId/sessions',workoutController.getClientFutureSessions );
+
 app.patch('/client/:clientId/', clientController.updateClientById );
 
 // console.log that your server is up and running

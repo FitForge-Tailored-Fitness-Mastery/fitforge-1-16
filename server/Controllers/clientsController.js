@@ -19,6 +19,9 @@ const getClients = async (req, res) => {
   });
 };
 
+
+
+
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -53,14 +56,15 @@ const login = async (req, res) => {
 
     // Compare provided password with stored hashed password
     const isMatch = await bcrypt.compare(password, user.password);
-
+    
     if (!isMatch) {
       // Password does not match
       return res.status(401).json({ error: 'Password is incorrect' });
     }
 
     // Password matches
-    res.status(200).json({ message: 'User found and password is correct' });
+    // Now also return the client_id with the response
+    res.status(200).json({ message: 'User found and password is correct', clientId: user.client_id });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ error: 'Internal server error' });
@@ -90,17 +94,15 @@ const signup = async (req, res) => {
     `;
 
     await new Promise((resolve, reject) => {
-      connection.query(
-        query,
-        [firstName, lastName, email, hashedPassword],
-        (error, results, fields) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve(results);
-          }
+      connection.query(query, [firstName, lastName, email, hashedPassword], (error, results, fields) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+
+          console.log('User inserted successfully with insertId:', results.insertId); // Add this line
         }
-      );
+      });
     });
 
     res.status(201).json({ message: 'User created successfully' });

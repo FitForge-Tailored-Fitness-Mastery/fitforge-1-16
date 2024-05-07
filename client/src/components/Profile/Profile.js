@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Profile.css';
 import profileImage from './proimg.jpg';
 import LogoutConfirmationDialog from './LogoutConfirmationDialog';
+import Navigation from '../ClientHome/Navigation';
+import '../ClientHome/ClientHome.css'; // Import associated styles for navbar
 import { Link, useNavigate } from 'react-router-dom';
 
 const Profile = ({ clientId }) => {
@@ -106,6 +108,10 @@ const Profile = ({ clientId }) => {
           onConfirm={handleConfirmLogout}
         />
       )}
+              <div className="profile">
+            {/* Add Navigation Bar */}
+            <Navigation />
+        </div>
     </div>
   );
 };
