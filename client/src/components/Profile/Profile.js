@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Profile.css';
 import profileImage from './proimg.jpg';
 import LogoutConfirmationDialog from './LogoutConfirmationDialog';
-import Navigation from '../ClientHome/Navigation';
+import NavigationBar from '../NavigationBar/NavigationBar';
 import '../ClientHome/ClientHome.css'; // Import associated styles for navbar
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -108,10 +108,10 @@ const Profile = ({ clientId }) => {
           onConfirm={handleConfirmLogout}
         />
       )}
-              <div className="profile">
-            {/* Add Navigation Bar */}
-            <Navigation />
-        </div>
+      
+      {/* Add Navigation Bar */}
+      <NavigationBar />
+      
     </div>
   );
 };

@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-color: #1f1e1e;
+  padding: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .App-logo {
@@ -36,3 +39,12 @@
     transform: rotate(360deg);
   }
 }
+
+body{
+  background-color: #1f1e1e;
+  padding: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+
