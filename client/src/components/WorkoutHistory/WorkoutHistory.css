@@ -1,37 +1,87 @@
-body{
-    background-color: #1f1e1e;
-    padding: 0;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+ 
+/* Styles for the Workout History section*/
+
+.WorkoutHistory {
+    /*padding: 20px;*/
+    color: white;
+    height: fit-content;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-/* Styles for the Navigation.js */
-nav{
-    background-color: #fdd673;
+.history-title{
+    color: white;
+    margin-top: 15px;
+    font-size: 2.5rem;
+    padding-left: 20px;
+}
+
+.flex-heading > b{
+    margin-left: 7px;
+}
+
+.flex-workout-history-day-container {
+    background-color: #333743;
     color: white;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0px;
-    position:fixed;
-    bottom: 0;
-    width: 100%;
+    flex-direction: column;
+    align-items:center;
     border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
 }
 
-.navbar-link{
-    color: white;
+.flex-heading {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    padding-left: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content:left;
+    /* align text to left */
+}
+
+.flex-container-workouthistory{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    border: solid 2px #f1f1f1;
+    border-radius: 5px;
     padding: 10px;
-    text-decoration: none;
-    font-size: 2.5rem;
-    transition: color 0.3s;
+    background-color: #1e2128;
 }
 
-.navbar-link:hover {
-    color: black;
+.column1 > img{
+    flex-grow: 1; 
+    margin: 0;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: lightgrey;
 }
 
-.navbar-link:active {
-    color: black;
+.column2 {
+    color: #f1f1f1;
+    flex-grow: 8; 
+    flex-direction: column;
+    padding: 0px;
+    margin-left: 5px;
+    align-content:center;
 }
 
 
+.column2 > .row1{
+    font-size: 1.3rem;
+    align-content: center;
+    margin-bottom: 9px;
+}
+
+.column2 > .row2{
+    font-size: 1rem;
+    align-content: center;
+}

@@ -9,6 +9,7 @@ import Signup from './components/Signup/Signup';
 import Index from './components/Index/Index';
 import ClientHome from './components/ClientHome/ClientHome';
 import WorkoutHistory from './components/WorkoutHistory/WorkoutHistory';
+import NavigationBar from './components/NavigationBar/NavigationBar';
 import './App.css';
 
 
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/index" element={<PrivateRoute><Index /></PrivateRoute>} />
+          <Route path='/nav' element={NavigationBar} />
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/trainerprofile/:clientId" element={<PrivateRoute><TrainerProfile /></PrivateRoute>} />
           <Route path="/edit-profile/:clientId" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
