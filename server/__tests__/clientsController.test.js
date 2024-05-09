@@ -1,158 +1,143 @@
-  import { getClients,login,signup } from '../Controllers/clientsController.js';
-import { getClientById } from '../Controllers/clientsController.js';
-import { getTrainerDetailsByTrainerId } from '../Controllers/clientsController.js';
-  import { getConnection } from '../databaseConn';
-  import * as bcrypt from 'bcrypt';
-  import request from 'supertest';
+import { getClients, getClientById, getTrainerDetailsByTrainerId, signup, login, updateClientById } from '../Controllers/clientsController';
+import { getConnection } from '../databaseConn';
+import bcrypt from 'bcrypt';
 
+jest.mock('../databaseConn');
+jest.mock('bcrypt');
 
+describe('clientsController', () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
 
-  jest.mock('../databaseConn');
-  jest.mock('bcrypt');
+  describe('getClients', () => {
+    const mockResults = [
+      { client_id: 1, fname: 'John', lname: 'Doe', email: 'john.doe@example.com' },
+      { client_id: 2, fname: 'Jane', lname: 'Smith', email: 'jane.smith@example.com' },
+    ];
 
+    it('should return an array of clients', async () => {
+      const req = {};
+      const res = {
+        json: jest.fn(),
+        status: jest.fn().mockReturnThis(),
+        send: jest.fn(),
+      };
 
-  describe('clientsController', () => {
-      describe('getClients', () => {
-        const mockResults = [
-          { client_id: 1, fname: 'John', lname: 'Doe', email: 'john.doe@example.com' },
-          { client_id: 2, fname: 'Jane', lname: 'Smith', email: 'jane.smith@example.com' },
-        ];
-    
-        afterEach(() => {
-          jest.resetAllMocks();
-        });
-    
-        it('should return an array of clients', async () => {
-          const req = {}; // No request parameters required for this function
-          const res = {
-            json: jest.fn(),
-            status: jest.fn().mockReturnThis(),
-            send: jest.fn(),
-          };
-    
-          getConnection.mockResolvedValueOnce({
-            query: jest.fn().mockImplementation((query, callback) => {
-              callback(null, mockResults, null);
-            }),
-          });
-    
-          await getClients(req, res);
-    
-          expect(res.json).toHaveBeenCalledWith(mockResults);
-        });
-    
-      it('should return 500 if there is an error querying the database', async () => {
-        const req = {};
-        const res = {
-          status: jest.fn().mockReturnThis(),
-          send: jest.fn(),
-          json: jest.fn(),
-        };
-  
-        const mockError = new Error('Database connection error');
-  
-        getConnection.mockResolvedValueOnce({
-          query: jest.fn().mockImplementation((_, callback) => {
-            callback(mockError, null, null);
-          }),
-        });
-  
-        await getClients(req, res);
-  
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.send).toHaveBeenCalledWith('Error retrieving data from the database');
+      getConnection.mockResolvedValueOnce({
+        query: jest.fn().mockImplementation((query, callback) => {
+          callback(null, mockResults, null);
+        }),
       });
 
-      it('should return 404 if no clients are found', async () => {
-        const req = { params: { clientId: '0' } };
-        const res = {
-          status: jest.fn().mockReturnThis(),
-          send: jest.fn(),
-          json: jest.fn(),
-        };
-      
-        getConnection.mockResolvedValueOnce({
-          query: jest.fn().mockImplementation((_, callback) => {
-            callback(null, [], null);
-          }),
-        });
-      
-        await getClients(req, res);
-      
-        expect(res.status).toHaveBeenCalledWith(404);
-        expect(res.send).toHaveBeenCalledWith('No clients found');
+      await getClients(req, res);
+      expect(res.json).toHaveBeenCalledWith(mockResults);
+    });
+
+    it('should return 500 if there is an error querying the database', async () => {
+      const req = {};
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        send: jest.fn(),
+        json: jest.fn(),
+      };
+
+      const mockError = new Error('Database connection error');
+
+      getConnection.mockResolvedValueOnce({
+        query: jest.fn().mockImplementation((_, callback) => {
+          callback(mockError, null, null);
+        }),
       });
+
+      await getClients(req, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.send).toHaveBeenCalledWith('Error retrieving data from the database');
+    });
+
+    it('should return 404 if no clients are found', async () => {
+      const req = {};
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        send: jest.fn(),
+        json: jest.fn(),
+      };
+
+      getConnection.mockResolvedValueOnce({
+        query: jest.fn().mockImplementation((_, callback) => {
+          callback(null, [], null);
+        }),
+      });
+
+      await getClients(req, res);
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.send).toHaveBeenCalledWith('No clients found');
     });
   });
 
-  describe('clientController', () => {
-    describe('getClientById', () => {
-      const mockResults = [
-        {
-          client_id: 2,
-          fname: 'Jane',
-          lname: 'Doe',
-          email: 'jane.doe@example.com',
-          phone: 2147483647,
-          dob: '1985-12-25T08:00:00.000Z',
-          gender: 'female',
-          height: 162,
-          weight: 55,
-          role: 'client',
-          is_assigned_trainer: 0,
-          password: 'password456',
-          medical_history: 'Allergic to peanuts',
-          emergency_contact: 1234567890,
-          emergency_contact_name: 'John Doe',
-          created_at: '2024-04-24T00:31:32.000Z',
-          updated_at: '2024-04-24T00:31:32.000Z',
-          trainer_id: 3,
-        },
-      ];
-  
-      afterEach(() => {
-        jest.resetAllMocks();
-      });
-  
-      it('should return the client data for a valid client', async () => {
-        const req = { params: { id: '2' } };
-        const res = {
-          json: jest.fn(),
-          status: jest.fn().mockReturnThis(),
-          send: jest.fn(),
-        };
-  
-        getConnection.mockResolvedValueOnce({
-          query: jest.fn().mockImplementation((_, __, callback) => {
-            callback(null, mockResults, null);
-          }),
-        });
-  
-        await getClientById(req, res);
-        expect(res.json).toHaveBeenCalledWith(mockResults[0]);
+  describe('getClientById', () => {
+    const mockResults = [
+      {
+        client_id: 2,
+        fname: 'Jane',
+        lname: 'Doe',
+        email: 'jane.doe@example.com',
+        phone: 2147483647,
+        dob: '1985-12-25T08:00:00.000Z',
+        gender: 'female',
+        height: 162,
+        weight: 55,
+        role: 'client',
+        is_assigned_trainer: 0,
+        password: 'password456',
+        medical_history: 'Allergic to peanuts',
+        emergency_contact: 1234567890,
+        emergency_contact_name: 'John Doe',
+        created_at: '2024-04-24T00:31:32.000Z',
+        updated_at: '2024-04-24T00:31:32.000Z',
+        trainer_id: 3,
+      },
+    ];
+
+    it('should return the client data for a valid client ID', async () => {
+      const req = { params: { id: '2' } };
+      const res = {
+        json: jest.fn(),
+        status: jest.fn().mockReturnThis(),
+        send: jest.fn(),
+      };
+
+      getConnection.mockResolvedValueOnce({
+        query: jest.fn().mockImplementation((_, __, callback) => {
+          callback(null, mockResults, null);
+        }),
       });
 
-      it('should return 500 if there is an error querying the database', async () => {
-        const req = {};
-        const res = {
-          status: jest.fn().mockReturnThis(),
-          send: jest.fn(),
-          json: jest.fn(),
-        };
-  
-        const mockError = new Error('Database connection error');
-  
-        getConnection.mockResolvedValueOnce({
-          query: jest.fn().mockImplementation((_, callback) => {
-            callback(mockError, null, null);
-          }),
-        });
-  
-        await getClients(req, res);
-  
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.send).toHaveBeenCalledWith('Error retrieving data from the database');
+      await getClientById(req, res);
+      expect(res.json).toHaveBeenCalledWith(mockResults[0]);
+    });
+
+    it('should return 500 if there is an error querying the database', async () => {
+      const req = { params: { id: '2' } };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        send: jest.fn(),
+        json: jest.fn(),
+      };
+
+    
+
+      const mockError = new Error('Database connection error');
+
+      getConnection.mockResolvedValueOnce({
+        query: jest.fn().mockImplementation((_, __, callback) => {
+          callback(mockError, null, null);
+        }),
       });
+
+      await getClientById(req, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.send).toHaveBeenCalledWith('Error retrieving client data');
     });
   });
 
@@ -247,21 +232,26 @@ import { getTrainerDetailsByTrainerId } from '../Controllers/clientsController.j
           expect(res.json).toHaveBeenCalledWith({ error: 'Email and password are required' });
         });
     
-        // it('should return 401 if user is not found', async () => {
-        //   const req = { body: { email: 'unknown@example.com', password: 'password123' } };
-        //   const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
-    
-        //   getConnection.mockResolvedValueOnce({
-        //     query: jest.fn().mockImplementation((query, values, callback) => {
-        //       callback(null, []);
-        //     }),
-        //   });
-    
-        //   await login(req, res);
-    
-        //   expect(res.status).toHaveBeenCalledWith(401);
-        //   expect(res.json).toHaveBeenCalledWith({ error: 'No user found with this email' });
-        // });
+        it('should return 401 if no user is found with the provided email', async () => {
+          const req = {
+            body: { email: 'nonexistent@example.com', password: 'password123' }
+          };
+          const res = {
+            status: jest.fn().mockReturnThis(),
+            json: jest.fn()
+          };
+        
+          getConnection.mockResolvedValueOnce({
+            query: jest.fn().mockImplementation((query, values, callback) => {
+              callback(null, []); // Simulate no user found
+            })
+          });
+        
+          await login(req, res);
+          expect(res.status).toHaveBeenCalledWith(401);
+          expect(res.json).toHaveBeenCalledWith({ error: 'No user found with this email' });
+        });
+        
     
         // it('should return 401 if password is incorrect', async () => {
         //   const req = { body: { email: 'john.doe@example.com', password: 'wrongpassword' } };
@@ -372,3 +362,102 @@ import { getTrainerDetailsByTrainerId } from '../Controllers/clientsController.j
         expect(res.json).toHaveBeenCalledWith({ error: 'Error inserting user into the database' });
       });
     });
+
+    describe('clientController', () => {
+      describe('updateClientById', () => {
+        afterEach(() => {
+          jest.resetAllMocks();
+        });
+    
+        it('should update the client data for a valid client ID', async () => {
+          const req = {
+            params: { clientId: '1' },
+            body: {
+              fname: 'John',
+              lname: 'Doe',
+              height: 175,
+              dob: '1990-05-15',
+              weight: 70,
+            },
+          };
+          const res = {
+            json: jest.fn(),
+            status: jest.fn().mockReturnThis(),
+            send: jest.fn(),
+          };
+    
+          const mockResult = { affectedRows: 1 };
+    
+          getConnection.mockResolvedValueOnce({
+            query: jest.fn().mockImplementation((_, __, callback) => {
+              callback(null, mockResult, null);
+            }),
+          });
+    
+          await updateClientById(req, res);
+    
+          expect(res.json).toHaveBeenCalledWith({ message: 'Client data updated successfully' });
+        });
+    
+        it('should return 404 if the client is not found', async () => {
+          const req = {
+            params: { clientId: '1' },
+            body: {
+              fname: 'John',
+              lname: 'Doe',
+              height: 175,
+              dob: '1990-05-15',
+              weight: 70,
+            },
+          };
+          const res = {
+            status: jest.fn().mockReturnThis(),
+            send: jest.fn(),
+          };
+    
+          const mockResult = { affectedRows: 0 };
+    
+          getConnection.mockResolvedValueOnce({
+            query: jest.fn().mockImplementation((_, __, callback) => {
+              callback(null, mockResult, null);
+            }),
+          });
+    
+          await updateClientById(req, res);
+    
+          expect(res.status).toHaveBeenCalledWith(404);
+          expect(res.send).toHaveBeenCalledWith('Client not found');
+        });
+    
+        it('should return 500 if there is an error querying the database', async () => {
+          const req = {
+            params: { clientId: '1' },
+            body: {
+              fname: 'John',
+              lname: 'Doe',
+              height: 175,
+              dob: '1990-05-15',
+              weight: 70,
+            },
+          };
+          const res = {
+            status: jest.fn().mockReturnThis(),
+            send: jest.fn(),
+          };
+    
+          const mockError = new Error('Database connection error');
+    
+          getConnection.mockResolvedValueOnce({
+            query: jest.fn().mockImplementation((_, __, callback) => {
+              callback(mockError, null, null);
+            }),
+          });
+    
+          await updateClientById(req, res);
+    
+          expect(res.status).toHaveBeenCalledWith(500);
+          expect(res.send).toHaveBeenCalledWith('Error updating client data');
+      });
+      });
+    });
+  })
