@@ -1,70 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navigation from '../NavigationBar/NavigationBar';
-import '../ClientHome/ClientHome.css'; // Import associated styles for navbar
-import '../WorkoutHistory/WorkoutHistory.css'; // Import associated styles
+import '../ClientHome/ClientHome.css';
+import '../WorkoutHistory/WorkoutHistory.css';
 
 const WorkoutHistory = () => {
+    const [workoutHistory, setWorkoutHistory] = useState([]);
+
+    useEffect(() => {
+        const fetchWorkoutHistory = async () => {
+            try {
+                const clientId = localStorage.getItem('clientId'); // Assuming client ID is stored in localStorage
+                if (!clientId) {
+                    console.error('Client ID is missing');
+                    return;
+                }
+                const response = await axios.get(`http://localhost:5000/client/${clientId}/workouts`);
+                setWorkoutHistory(response.data);
+            } catch (error) {
+                console.error('Failed to fetch workout history:', error);
+            }
+        };
+
+        fetchWorkoutHistory();
+    }, []);
+
     return (
         <div className="workout-history">
-            
-
-            <div className="history-title"> Workout History </div>
-
-            <div className="flex-workout-history-day-container">
-                    <div id="dayDate-heading" className="flex-heading">
-                        <i className="fas fa-calendar"></i> <b>Wednesday, Aug 22</b>
+            <div className="history-title">Workout History</div>
+            {workoutHistory.length > 0 ? workoutHistory.map((workout, index) => (
+                <div key={index} className="flex-workout-history-day-container">
+                    <div className="flex-heading">
+                        <i className="fas fa-calendar"></i> <b>{new Date(workout.date).toLocaleDateString()}</b>
                     </div>
-
-                    <div id="workhist1" className="flex-container-workouthistory">
+                    <div className="flex-container-workouthistory">
                         <div className="column1">
-                            <img src="target.png" alt="" />
+                            <img src="target.png" alt="Workout" />
                         </div>
                         <div className="column2">
-                            <div className="row1"> Cardio </div>
-                            <div className="row2">Time - Duration</div>
+                            <div className="row1">{workout.exercise_name} with {workout.fname} {workout.lname}</div>
+                            <div className="row2">Time - {workout.duration} minutes</div>
+                            <div className="row3">Calories Burned - {workout.calories_burned}</div>
+                            <div className="row4">{workout.sets}</div>
+                            <div className="row5">{workout.description}</div>
                         </div>
                     </div>
-
-                    <div id="workhist2" className="flex-container-workouthistory">
-                        <div className="column1">
-                            <img src="target.png" alt="" />
-                        </div>
-                        <div className="column2">
-                            <div className="row1"> Yoga </div>
-                            <div className="row2">Time - Duration</div>
-                        </div>
-                    </div>
-            </div>
-
-            <div className="flex-workout-history-day-container">
-                    <div id="dayDate-heading" className="flex-heading">
-                        <i className="fas fa-calendar"></i> <b>Tuesday, Aug 21</b>
-                    </div>
-
-                    <div id="workhist1" className="flex-container-workouthistory">
-                        <div className="column1">
-                            <img src="target.png" alt="" />
-                        </div>
-                        <div className="column2">
-                            <div className="row1"> Cardio </div>
-                            <div className="row2">Time - Duration</div>
-                        </div>
-                    </div>
-
-                    <div id="workhist2" className="flex-container-workouthistory">
-                        <div className="column1">
-                            <img src="target.png" alt="" />
-                        </div>
-                        <div className="column2">
-                            <div className="row1"> HIIT </div>
-                            <div className="row2">Time - Duration</div>
-                        </div>
-                    </div>
-            </div>
-
-            {/* Add Navigation Bar */}
+                </div>
+            )) : <p>No workout history found.</p>}
             <Navigation />
-
         </div>
     );
 };
