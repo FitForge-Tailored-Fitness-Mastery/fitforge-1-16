@@ -63,3 +63,4 @@ export const getClientFutureSessions = async (req, res) => {
     res.json(results);
   });
 };
+

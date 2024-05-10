@@ -3,14 +3,22 @@ import './Profile.css';
 import profileImage from './proimg.jpg';
 import LogoutConfirmationDialog from './LogoutConfirmationDialog';
 import NavigationBar from '../NavigationBar/NavigationBar';
-import '../ClientHome/ClientHome.css'; // Import associated styles for navbar
 import { Link, useNavigate } from 'react-router-dom';
 
-const Profile = ({ clientId }) => {
+const Profile = () => {
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
   const [clientData, setClientData] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const clientId = localStorage.getItem('clientId'); // Get client ID from localStorage
+    if (!clientId) {
+      navigate('/login'); // Redirect to login if no client ID is found
+      return;
+    }
+    fetchClientData(clientId);
+  }, [navigate]);
 
   const fetchClientData = async (client_id) => {
     try {
@@ -19,18 +27,12 @@ const Profile = ({ clientId }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log(data);
       setClientData(data);
     } catch (error) {
       console.error('Fetch error:', error);
       setError('Failed to load client data');
     }
   };
-
-  useEffect(() => {
-    const clientId = localStorage.getItem('clientId');
-    fetchClientData(String(clientId));
-  }, []);
 
   const handleLogoutClick = () => {
     setShowLogoutConfirmation(true);
@@ -41,8 +43,9 @@ const Profile = ({ clientId }) => {
   };
 
   const handleConfirmLogout = () => {
-    setShowLogoutConfirmation(false);
     localStorage.removeItem('clientId');
+    navigate('/login');
+    setShowLogoutConfirmation(false);
   };
 
   const handleEditProfile = () => {
@@ -58,9 +61,7 @@ const Profile = ({ clientId }) => {
 
   return (
     <div className="profile-container">
-      {/* Render error message if there is an error */}
       {error && <div className="error-message">{error}</div>}
-      {/* Render profile details only if there is no error and clientData is available */}
       {!error && clientData && (
         <>
           <div className="profile-header">
@@ -78,7 +79,6 @@ const Profile = ({ clientId }) => {
             </div>
             <div className="detail-box">
               <p className="detail-label">Age</p>
-              {/* Make sure you calculate the age from dob */}
               <p className="detail-value">{calculateAge(clientData.dob)}</p>
             </div>
             <div className="detail-box">
@@ -86,15 +86,9 @@ const Profile = ({ clientId }) => {
               <p className="detail-value">{clientData.weight} lb</p>
             </div>
           </div>
-          <button className="edit-button" onClick={handleEditProfile}>
-            Edit Profile
-          </button>
+          <button className="edit-button" onClick={handleEditProfile}>Edit Profile</button>
           <div className="menu-container">
-            <Link
-              to={`/trainerprofile/${clientData.trainer_id}`}
-              className="menu-button"
-              style={{ textDecoration: 'none' }}
-            >
+            <Link to={`/trainerprofile/${clientData.trainer_id}`} className="menu-button">
               My Trainer <span className="menu-arrow">{' >'}</span>
             </Link>
             <button className="menu-button" onClick={handleLogoutClick}>
@@ -104,15 +98,9 @@ const Profile = ({ clientId }) => {
         </>
       )}
       {showLogoutConfirmation && (
-        <LogoutConfirmationDialog
-          onClose={handleCancelLogout}
-          onConfirm={handleConfirmLogout}
-        />
+        <LogoutConfirmationDialog onClose={handleCancelLogout} onConfirm={handleConfirmLogout} />
       )}
-      
-      {/* Add Navigation Bar */}
       <NavigationBar />
-      
     </div>
   );
 };

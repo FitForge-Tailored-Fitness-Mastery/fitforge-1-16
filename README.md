@@ -7,6 +7,8 @@
 
 ## Team Documents
 
+- [Product Backlog](https://docs.google.com/spreadsheets/d/1aV8wOQ1cMoIzJpDANTbLwMPhGlpCFx3utmCPg1xPqn0/edit?usp=sharing)
+
 - [Google Drive link](https://drive.google.com/drive/folders/1rXhtTBnHbtCfCw7hAS1VoHzwNcFNrbLB?usp=sharing)
 
 - [Complete Project Proposal](https://docs.google.com/document/d/1IjBLELYTpea1wDm4hu_xZq9iV70JjgkFEY9f71dJv-I/edit?usp=sharing)
