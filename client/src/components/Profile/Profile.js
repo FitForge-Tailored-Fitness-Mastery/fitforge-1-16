@@ -3,6 +3,7 @@ import './Profile.css';
 import profileImage from './proimg.jpg';
 import LogoutConfirmationDialog from './LogoutConfirmationDialog';
 import NavigationBar from '../NavigationBar/NavigationBar';
+import '../ClientHome/ClientHome.css'; // Import associated styles for navbar
 import { Link, useNavigate } from 'react-router-dom';
 
 const Profile = () => {
@@ -13,12 +14,8 @@ const Profile = () => {
 
   useEffect(() => {
     const clientId = localStorage.getItem('clientId'); // Get client ID from localStorage
-    if (!clientId) {
-      navigate('/login'); // Redirect to login if no client ID is found
-      return;
-    }
-    fetchClientData(clientId);
-  }, [navigate]);
+    fetchClientData(String(clientId));
+  }, []);
 
   const fetchClientData = async (client_id) => {
     try {
@@ -44,7 +41,6 @@ const Profile = () => {
 
   const handleConfirmLogout = () => {
     localStorage.removeItem('clientId');
-    navigate('/login');
     setShowLogoutConfirmation(false);
   };
 
