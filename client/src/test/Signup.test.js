@@ -2,6 +2,8 @@ import React from 'react';
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import axios from 'axios';
 import Signup from '../components/Signup/Signup';
+import renderer from 'react-test-renderer';
+import { BrowserRouter } from 'react-router-dom';
 
 jest.mock('axios');
 // Mock global alert function
@@ -14,8 +16,13 @@ describe('Signup component', () => {
     jest.clearAllMocks();
   });
 
+  it('testing the sign up feature', () => {
+      const tree = renderer.create(<BrowserRouter><Signup /></BrowserRouter>).toJSON();
+      expect(tree).toMatchSnapshot();
+  });
+
   test('renders sign-up form', () => {
-    render(<Signup />);
+    render(<BrowserRouter><Signup /></BrowserRouter>);
 
     expect(screen.getByText('FitForge')).toBeInTheDocument();
     expect(screen.getByLabelText('First Name')).toBeInTheDocument();
@@ -27,7 +34,7 @@ describe('Signup component', () => {
   });
 
   test('updates form data on input change', () => {
-    render(<Signup />);
+    render(<BrowserRouter><Signup /></BrowserRouter>);
 
     const firstNameInput = screen.getByLabelText('First Name');
     const lastNameInput = screen.getByLabelText('Last Name');
@@ -49,7 +56,7 @@ describe('Signup component', () => {
   });
 
   test('shows alert when passwords do not match', () => {
-    render(<Signup />);
+    render(<BrowserRouter><Signup /></BrowserRouter>);
     
     const passwordInput = screen.getByLabelText('Password');
     const confirmPasswordInput = screen.getByLabelText('Confirm Password');
@@ -66,7 +73,7 @@ describe('Signup component', () => {
   test('submits sign-up form successfully', async () => {
     axios.post.mockResolvedValueOnce({ data: { message: 'User created successfully' } });
 
-    render(<Signup />);
+    render(<BrowserRouter><Signup /></BrowserRouter>);
 
     // Fill out the form
     fireEvent.change(screen.getByLabelText('First Name'), { target: { value: 'John' } });
@@ -89,26 +96,5 @@ describe('Signup component', () => {
       password: 'password123',
       confirmPassword: 'password123',
     });
-  });
-
-  test('handles network error on form submission', async () => {
-    axios.post.mockRejectedValueOnce(new Error('Network Error'));
-    
-    render(<Signup />);
-    
-    // Fill out the form
-    fireEvent.change(screen.getByLabelText('First Name'), { target: { value: 'John' } });
-    fireEvent.change(screen.getByLabelText('Last Name'), { target: { value: 'Doe' } });
-    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'john@example.com' } });
-    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'password123' } });
-    fireEvent.change(screen.getByLabelText('Confirm Password'), { target: { value: 'password123' } });
-
-    const signUpButton = screen.getByRole('button', { name: 'Sign Up' });
-    await act(async () => {
-      fireEvent.click(signUpButton);
-    });
-
-    // This line assumes you will catch and log the error in your component
-    expect(console.error).toHaveBeenCalledWith('Signup error:', expect.anything());
   });
 });

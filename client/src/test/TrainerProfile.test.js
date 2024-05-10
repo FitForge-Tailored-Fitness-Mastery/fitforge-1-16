@@ -28,7 +28,7 @@ describe('TrainerProfile', () => {
     global.fetch.mockResolvedValueOnce({
       ok: true,
       json: async () => ({
-        imageUrl: 'http://example.com/image.jpg',
+        imageUrl: 'trainerprofileimg.png',
         fname: 'John',
         lname: 'Doe',
         email: 'john.doe@example.com',
@@ -42,7 +42,7 @@ describe('TrainerProfile', () => {
       expect(screen.getByRole('heading', { name: 'John Doe' })).toBeInTheDocument();
       expect(screen.getByText('Email: john.doe@example.com')).toBeInTheDocument();
       expect(screen.getByText('Phone: 123-456-7890')).toBeInTheDocument();
-      expect(screen.getByRole('img')).toHaveAttribute('src', 'http://example.com/image.jpg');
+      expect(screen.getByRole('img')).toHaveAttribute('src', 'trainerprofileimg.png');
     });
   });
 

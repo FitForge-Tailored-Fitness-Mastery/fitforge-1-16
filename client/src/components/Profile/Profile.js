@@ -28,7 +28,8 @@ const Profile = ({ clientId }) => {
   };
 
   useEffect(() => {
-    fetchClientData('2');
+    const clientId = localStorage.getItem('clientId');
+    fetchClientData(String(clientId));
   }, []);
 
   const handleLogoutClick = () => {
