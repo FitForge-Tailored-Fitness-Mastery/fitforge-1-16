@@ -1,73 +1,81 @@
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
+.trainer-profile-container {
+    height: 100vh;
+    width: auto;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+    /* background-color: #f07171; */
+    color: white;
 }
 
-.trainer-profile-container {
-  max-width: 400px;
-  min-height: 100vh;
-  background-color: #333;
-  color: white;
-  font-family: Arial, sans-serif;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 20px;
+.trainer-profile-box {
+    background-color: #3a4352;
+    max-width: 500px;
+    width: inherit;
+    height: 78vh;
+    padding: 25px;
+    padding-top: 35px; 
+    border-radius: 9px;
+    margin: 15px 10px 90px 10px;
+    align-content: safe;
+    align-self: center;
 }
 
 .trainer-profile-header {
-  text-align: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    align-content: center;
+    margin-bottom: 8px;
 }
 
 .trainer-profile-picture-container {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-bottom: 20px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    align-self: center;
 }
 
 .trainer-profile-photo {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    align-self: center;
 }
 
 .trainer-profile-name {
-  color: gold;
+    margin: 5px 0px 5px 0px;
+    font-size: 1.8rem;
+    color: #fdd673;
 }
 
 .trainer-profile-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  margin-bottom: 20px;
-  width: 100%;
-  background-color: #555;
-  padding: 20px;
-  border-radius: 10px;
+    justify-content: space-around;
+    align-self: center;
+    text-align: center;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;  /* for text inside */
+    border-radius: 10px;
+    background-color: #5a687f;
 }
 
 .trainer-profile-details p {
-  margin: 5px 0;
+    margin: 5px;
+    align-items: center;
+    padding: 5px;
 }
 
 .error {
   color: red;
   font-weight: bold;
   margin-bottom: 10px;
-}
-
-@media (max-width: 480px) {
-  .trainer-profile-container {
-    margin: 20px 10px;
-    padding: 10px;
-  }
 }

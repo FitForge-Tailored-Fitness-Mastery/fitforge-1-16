@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './Profile.css';
-import profileImage from './proimg.jpg';
+import { Link, useNavigate } from 'react-router-dom';
 import LogoutConfirmationDialog from './LogoutConfirmationDialog';
 import NavigationBar from '../NavigationBar/NavigationBar';
-import '../ClientHome/ClientHome.css'; // Import associated styles for navbar
-import { Link, useNavigate } from 'react-router-dom';
+import profileImage from './proimg.jpg';
+import './Profile.css';
 
 const Profile = ({ clientId }) => {
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
@@ -57,7 +56,8 @@ const Profile = ({ clientId }) => {
 
   return (
     <div className="profile-container">
-      {/* Render error message if there is an error */}
+      <div className='profile-box'> 
+          {/* Render error message if there is an error */}
       {error && <div className="error-message">{error}</div>}
       {/* Render profile details only if there is no error and clientData is available */}
       {!error && clientData && (
@@ -77,7 +77,6 @@ const Profile = ({ clientId }) => {
             </div>
             <div className="detail-box">
               <p className="detail-label">Age</p>
-              {/* Make sure you calculate the age from dob */}
               <p className="detail-value">{calculateAge(clientData.dob)}</p>
             </div>
             <div className="detail-box">
@@ -89,11 +88,9 @@ const Profile = ({ clientId }) => {
             Edit Profile
           </button>
           <div className="menu-container">
-            <Link
-              to={`/trainerprofile/${clientData.trainer_id}`}
+            <Link to={`/trainerprofile/${clientData.trainer_id}`}
               className="menu-button"
-              style={{ textDecoration: 'none' }}
-            >
+              style={{ textDecoration: 'none' }}>
               My Trainer <span className="menu-arrow">{' >'}</span>
             </Link>
             <button className="menu-button" onClick={handleLogoutClick}>
@@ -108,10 +105,10 @@ const Profile = ({ clientId }) => {
           onConfirm={handleConfirmLogout}
         />
       )}
+      </div>
       
       {/* Add Navigation Bar */}
       <NavigationBar />
-      
     </div>
   );
 };

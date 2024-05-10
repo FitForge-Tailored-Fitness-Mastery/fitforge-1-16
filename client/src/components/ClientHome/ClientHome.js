@@ -11,7 +11,7 @@ const ClientHome = () => {
 
       {/* Add Workout Summary */}
       <WorkoutSummary />
-
+      
       {/* Add Progress Chart */}
       <ProgressChart />
 
@@ -20,6 +20,7 @@ const ClientHome = () => {
 
       {/* Add Navigation Bar */}
       <Navigation />
+
     </div>
   );
 };

@@ -1,75 +1,98 @@
 .login-container {
-    width:auto;
+    width: auto;
     height: 100vh;
-    background-color: #1f1e1e; /* Background color of the full page */
+    position: relative;
+    background-image: url('./loginbg.jpg'); 
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the background image */
     display: flex;
-    justify-content: center;
+    justify-content:space-around;
     align-items: center;
-    margin: 0; /* Reset any default margin */
-    padding: 0; /* Reset any default padding */
+    margin: 0px;
+    padding: 0px;
 }
-  
+
+.login-container::before{
+    content: ''; /* Required for pseudo-elements */
+    position: absolute; /* Position relative to the login-container */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* Black background with 50% opacity */
+    z-index: 0; /* Ensure it's below the content but above the background image */
+}
+
 .login-box {
     max-width: 400px;
     width: 100%;
     padding: 20px;
-    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.4);    
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px; /* Adjust the margin to give some space on the sides */
+    margin: 10px;
+    position: relative;
+    z-index: 1; /* Higher than the overlay */
 }
   
 .login-form {
-  display: flex;
-  flex-direction: column;
- }
+    display: flex;
+    flex-direction: column;
+}
   
 .login-form h1 {
-  color: gold;
-  text-align: center;
-  }
+    color: #fdd673;
+    text-align: center;
+    font-size: 2.3rem;
+    margin-bottom: 35px;
+}
   
-  .input-group {
+.input-group {
     margin-bottom: 15px;
-  }
+}
   
-  .input-group label {
+.input-group label {
     display: block;
     margin-bottom: 5px;
     color: white;
-  }
+}
   
-  .input-group input {
-    width: 100%;
-    padding: 10px;
+.input-group input {
+    width: 90%;
+    margin-bottom: 8px;
+    padding: 7.5px;
     border: none;
     border-radius: 5px;
-    font-size: 1rem;
-  }
+    font-size: 0.9rem;
+}
   
-  .login-button {
-    padding: 10px;
-    background-color: gold;
+.login-button{
+    margin-top: 25px;
+    padding: 7px;
+    display: inline-block;
+    align-self: center;
+    background-color: #fdd673 ;
     color: black;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
     cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px;
-  }
+    font-weight: 650;
+    font-size: 1.2rem;
+    width: 50%;
+}
   
-  .signup-link {
+.signup-link {
     margin-top: 15px;
     text-align: center;
     color: white;
-  }
+}
   
-  .signup-link a {
-    color: gold;
+.signup-link a {
+    color: #fdd673;
     text-decoration: none;
-  }
+}
   
-  .signup-link a:hover {
+.signup-link a:hover {
     text-decoration: underline;
-  }
+}
   

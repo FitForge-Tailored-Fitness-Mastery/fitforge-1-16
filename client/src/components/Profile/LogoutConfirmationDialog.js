@@ -8,7 +8,7 @@ const LogoutConfirmationDialog = ({ onClose, onConfirm }) => {
   // Update the onConfirm function to navigate to login
   const handleConfirm = () => {
     onConfirm(); // Call the original onConfirm function if needed
-    navigate('/'); // Navigate to the login page
+    navigate('/login'); // Navigate to the login page
   };
 
   return (

@@ -1,79 +1,102 @@
 .signup-container {
-    max-width: 400px;
-    margin: 10px;
-    padding: 10px;
-    background-color: #333;
+    width: auto;
+    height: 100vh;
+    position: relative;
+    background-image: url('./loginbg.jpg'); 
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the background image */
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
     color: white;
-    font-family: Arial, sans-serif;
-    border-radius: 10px;
-  }
+}
   
-  .signup-form {
+.signup-container::before {
+    content: ''; /* Required for pseudo-elements */
+    position: absolute; /* Position relative to the login-container */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7); /* Black background with 50% opacity */
+    z-index: 0; /* Ensure it's below the content but above the background image */
+}
+
+.signup-box{
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.4);    
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1; /* Higher than the overlay */
+}
+
+.signup-form {
     display: flex;
     flex-direction: column;
-  }
-  
-  .signup-title {
+}
+
+.signup-form > h1 {
+    color: #fdd673;
     text-align: center;
-    color: gold;
-  }
-  
-  .signup-tagline {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-  }
-  
-  .signup-form input[type="text"],
-  .signup-form input[type="email"],
-  .signup-form input[type="password"] {
-    margin-bottom: 10px;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 0.9rem;
-  }
-  
-  .signup-button {
-    padding: 15px;
-    background-color: gold;
-    color: #333;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  
-  .signup-form label {
+    font-size: 2.3rem;
+    margin-bottom: 0px;
+}
+
+.signup-form .signup-tagline{
+  font-size: 0.8rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 35px;
+  font-weight: 100;
+}
+
+.signup-form label {
+    display: block;
     margin-bottom: 5px;
-    font-size: 0.8rem;
-  }
+    color: white;
+}
   
-  /* Responsive styling for iPhone 12 Pro Max and others */
-  @media (max-width: 896px) {
-    .signup-container {
-      max-width: 90%;
-      padding: 10px;
-    }
-    .signup-form input[type="text"],
-    .signup-form input[type="email"],
-    .signup-form input[type="password"] {
-      padding: 12px;
-    }
-    .signup-button {
-      padding: 12px;
-    }
-  }
+.signup-form input {
+    width: 90%;
+    margin-bottom: 8px;
+    padding: 7.5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
   
-  /* Further responsive adjustments for smaller devices */
-  @media (max-width: 480px) {
-    .signup-container {
-      margin: 20px 10px;
-      padding: 10px;
-    }
-    .signup-title, .signup-tagline {
-      margin-bottom: 15px;
-    }
+.signup-button {
+    margin-top: 25px;
+    padding: 7px;
+    display: inline-block;
+    align-self: center;
+    background-color: #fdd673 ;
+    color: black;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 650;
+    font-size: 1.2rem;
+    width: 50%;
   }
+
+.login-link{
+    margin-top: 15px;
+    text-align: center;
+    color: white;
+}
+
+.login-link a {
+    color: #fdd673;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
   

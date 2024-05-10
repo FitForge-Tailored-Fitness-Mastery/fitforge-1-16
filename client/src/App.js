@@ -24,10 +24,12 @@ const App = () => {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Login />} />
+          {/* define login path name & add to logout from profile here! */}
+          <Route path="/" element={<Login />} /> 
+          <Route path="/login" element={<Login />} />             
           <Route path="/signup" element={<Signup />} />
           <Route path="/index" element={<PrivateRoute><Index /></PrivateRoute>} />
-          <Route path='/nav' element={NavigationBar} />
+          <Route path='/nav' element={<NavigationBar/>} />
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/trainerprofile/:clientId" element={<PrivateRoute><TrainerProfile /></PrivateRoute>} />
           <Route path="/edit-profile/:clientId" element={<PrivateRoute><EditProfile /></PrivateRoute>} />

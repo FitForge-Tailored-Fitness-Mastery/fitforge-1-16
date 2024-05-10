@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import NavigationBar from '../NavigationBar/NavigationBar';
 import './EditProfile.css';
 
 const EditProfile = () => {
@@ -79,62 +80,66 @@ const EditProfile = () => {
 
   return (
     <div className="edit-profile-container">
-      <h2>Edit Profile</h2>
-      {/* Displaying error message */}
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="fname">First Name:</label>
-          <input
-            type="text"
-            id="fname"
-            name="fname"
-            value={formData.fname}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="lname">Last Name:</label>
-          <input
-            type="text"
-            id="lname"
-            name="lname"
-            value={formData.lname}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="height">Height (cm):</label>
-          <input
-            type="number"
-            id="height"
-            name="height"
-            value={formData.height}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="dob">Date of Birth:</label>
-          <input
-            type="date"
-            id="dob"
-            name="dob"
-            value={formData.dob}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="weight">Weight (lb):</label>
-          <input
-            type="number"
-            id="weight"
-            name="weight"
-            value={formData.weight}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button type="submit">Save Changes</button>
-      </form>
+      <div className='edit-profile-box'>
+          <h2>Edit Profile</h2>
+          {/* Displaying error message */}
+          {error && <p className="error">{error}</p>}
+          <form id='editprofileform' onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="fname">First Name:</label>
+              <input
+                type="text"
+                id="fname"
+                name="fname"
+                value={formData.fname}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="lname">Last Name:</label>
+              <input
+                type="text"
+                id="lname"
+                name="lname"
+                value={formData.lname}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="height">Height (cm):</label>
+              <input
+                type="number"
+                id="height"
+                name="height"
+                value={formData.height}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="dob">Date of Birth:</label>
+              <input
+                type="date"
+                id="dob"
+                name="dob"
+                value={formData.dob}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="weight">Weight (lb):</label>
+              <input
+                type="number"
+                id="weight"
+                name="weight"
+                value={formData.weight}
+                onChange={handleInputChange}
+              />
+            </div>
+            <button type="submit" className='editprofilebutton'>Save Changes</button>
+          </form>
+      </div>
+      {/* Add Navigation Bar */}
+      <NavigationBar />
     </div>
   );
 };

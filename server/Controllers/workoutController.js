@@ -10,7 +10,7 @@ export const getClientWorkouts = async (req, res) => {
       JOIN clients c ON tm.client_id = c.client_id
       JOIN exercises e ON w.exercise_id = e.exercise_id
       WHERE c.client_id = ?
-      ORDER BY \`date\` DESC
+      ORDER BY \date\ DESC
     `;
   connection.query(query, [client_id], (error, results, fields) => {
     if (error) {
@@ -63,89 +63,3 @@ export const getClientFutureSessions = async (req, res) => {
     res.json(results);
   });
 };
-
-
-describe('workoutController', () => {
-  describe('getClientFutureSessions', () => {
-    const mockFutureSessions = [
-      {
-        fname: 'Alice',
-        lname: 'Johnson',
-        date: '2024-05-10T21:00:00.000Z',
-        duration: 90,
-      },
-      {
-        fname: 'Alice',
-        lname: 'Johnson',
-        date: '2024-05-10T21:00:00.000Z',
-        duration: 90,
-      },
-    ];
-
-    afterEach(() => {
-      jest.resetAllMocks();
-    });
-
-    it('should return an array of future sessions for a valid client', async () => {
-      const req = { params: { clientId: '1' } };
-      const res = {
-        json: jest.fn(),
-        status: jest.fn().mockReturnThis(),
-        send: jest.fn(),
-      };
-
-      getConnection.mockResolvedValueOnce({
-        query: jest.fn().mockImplementation((_, __, callback) => {
-          callback(null, mockFutureSessions, null);
-        }),
-      });
-
-      await getClientFutureSessions(req, res);
-      expect(res.json).toHaveBeenCalledWith(mockFutureSessions);
-    });
-
-    it('should return 404 if no future sessions are found for the client', async () => {
-      const req = { params: { clientId: '2' } };
-      const res = {
-        status: jest.fn().mockReturnThis(),
-        send: jest.fn(),
-        json: jest.fn(),
-      };
-
-      getConnection.mockResolvedValueOnce({
-        query: jest.fn().mockImplementation((_, __, callback) => {
-          callback(null, [], null);
-        }),
-      });
-
-      await getClientFutureSessions(req, res);
-      expect(res.status).toHaveBeenCalledWith(404);
-      expect(res.send).toHaveBeenCalledWith(
-        'No future sessions found for the client'
-      );
-    });
-
-    it('should return 500 if there is an error querying the database', async () => {
-      const req = { params: { clientId: '1' } };
-      const res = {
-        status: jest.fn().mockReturnThis(),
-        send: jest.fn(),
-        json: jest.fn(),
-      };
-      const mockError = new Error('Database connection error');
-
-      getConnection.mockResolvedValueOnce({
-        query: jest.fn().mockImplementation((_, __, callback) => {
-          callback(mockError, null, null);
-        }),
-      });
-
-      await getClientFutureSessions(req, res);
-      expect(res.status).toHaveBeenCalledWith(500);
-      expect(res.send).toHaveBeenCalledWith(
-        'Error retrieving data from the database'
-      );
-      //expect(console.error).toHaveBeenCalledWith('Error querying the database: ', mockError);
-    });
-  });
-});

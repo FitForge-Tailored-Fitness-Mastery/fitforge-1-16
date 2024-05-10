@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import './TrainerProfile.css';
+import NavigationBar from '../NavigationBar/NavigationBar';
 import trainerImg from './trainerprofileimg.png'; // Import the trainer image
+import './TrainerProfile.css';
 
 const TrainerProfile = () => {
   const [trainerDetails, setTrainerDetails] = useState(null);
@@ -36,6 +37,7 @@ const TrainerProfile = () => {
 
   return (
     <div className="trainer-profile-container">
+      <div className='trainer-profile-box'>
       <div className="trainer-profile-header">
         {/* Image and name of the trainer */}
         <div className="trainer-profile-picture-container">
@@ -48,6 +50,10 @@ const TrainerProfile = () => {
         <p>Phone: {trainerDetails?.phone}</p>
         {/* Other trainer details */}
       </div>
+      </div>
+
+      {/* Add Navigation Bar */}
+      <NavigationBar />
     </div>
   );
 };

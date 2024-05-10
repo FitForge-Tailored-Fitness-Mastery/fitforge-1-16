@@ -26,7 +26,7 @@ const Login = () => {
         <div className="login-container">
             <div className="login-box">
                 <form onSubmit={handleSubmitLogin} className="login-form">
-                    <h1>Login</h1>
+                    <h1>FitForge</h1>
                     <div className="input-group">
                         <label htmlFor="email">Username</label>
                         <input
@@ -49,7 +49,7 @@ const Login = () => {
                     </div>
                     <button type="submit" className="login-button">Login</button>
                     <p className="signup-link">
-                        New user? <Link to="/signup">Sign up</Link>
+                        New here? <Link to="/signup">Sign up</Link>
                     </p>
                 </form>
             </div>

@@ -1,68 +1,78 @@
 .edit-profile-container {
-    max-width: 400px;
-    min-width: 40vh;
-    min-height: 100vh;
-    margin: auto;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-    font-family: Arial, sans-serif;
-    border-radius: 10px;
-  }
-  
-  .edit-profile-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input {
-    width: 70%;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-  }
-  
-  button[type='submit'] {
-    display: block;
+    height: 100vh;
     width: 100%;
-    padding: 10px;
-    background-color: gold;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .edit-profile-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #333;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
     color: white;
-    font-family: Arial, sans-serif;
-    border-radius: 10px;
+    /* background-color: rgb(249, 187, 106); */
+}
+
+.edit-profile-box {
+    background-color: #3a4352;
+    /* max-width: 500px; */
+    width: inherit;
+    height: 80vh;
+    padding: 20px; 
+    border-radius: 9px;
+    margin: 15px 15px 90px 15px;
+    align-content: safe;
+    align-self: center;
+    align-items: center;
+    /* display: flex;
+    flex-direction: row; */
+}
+  
+.edit-profile-container h2 {
+    text-align: center;
+    margin-bottom: 0px 0px 18px 0px;
+    font-weight: 300;
+    font-size: 1.7rem;
+}
+
+.editprofileform{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 7px;
+    display: flex;
+    flex-direction: column;
+    /* align-content: safe;
+    align-self: center; */
+    align-items: center;
   }
   
-  @media (max-width: 896px) {
-    .profile-container {
-      max-width: 90%;
-      padding: 10px;
-    }
-  }
+.form-group label {
+    display: flex;
+    text-align: left;
+    /* align-content: safe; */
+    align-self: center; 
+    align-items: flex-start;
+    margin-bottom: 5px;
+}
   
-  @media (max-width: 480px) {
-    .profile-container {
-      margin: 20px 10px;
-      padding: 10px;
-    }
-  }
+.form-group input {
+    width: 87%;
+    padding: 7px;
+    border-radius: 5px;
+    border: none;
+}
+  
+.editprofilebutton {
+    background-color: #fdd673;
+    color: black;
+    font-weight: bold; 
+    border: none;
+    border-radius: 30px;
+    justify-content: space-around;
+    align-items: center; 
+    align-self: center;
+    padding: 10px 20px;
+    width: 85%;
+    margin-top: 10px;
+}
