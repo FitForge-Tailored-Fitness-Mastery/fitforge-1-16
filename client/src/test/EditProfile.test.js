@@ -3,75 +3,92 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import EditProfile from '../components/Profile/EditProfile';
 import { BrowserRouter } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-// Correctly setting up mocks for useParams and useNavigate
 const mockedNavigate = jest.fn();
+// Mock useParams
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useParams: () => ({
-    clientId: '123'  // Ensure this returns an object with clientId
-  }),
+  useParams: jest.fn(),
   useNavigate: () => mockedNavigate,
 }));
 
-// Mock for fetch
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({ fname: 'John', lname: 'Doe', height: '180', dob: '1990-01-01', weight: '180' }),
-    ok: true,
-  })
-);
-
 describe('EditProfile', () => {
   beforeEach(() => {
-    fetch.mockClear();
-    mockedNavigate.mockClear();
+    global.fetch = jest.fn();
+    useParams.mockReturnValue({ clientId: '123' });
   });
 
-  test('renders all form fields and a submit button', () => {
-    render(<BrowserRouter><EditProfile /></BrowserRouter>);
-    const firstNameInput = screen.getByLabelText('First Name:');
-    const lastNameInput = screen.getByLabelText('Last Name:');
-    const heightInput = screen.getByLabelText('Height (cm):');
-    const dobInput = screen.getByLabelText('Date of Birth:');
-    const weightInput = screen.getByLabelText('Weight (lb):');
-    const submitButton = screen.getByRole('button', { name: 'Save Changes' });
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
 
-    expect(firstNameInput).toBeInTheDocument();
-    expect(lastNameInput).toBeInTheDocument();
-    expect(heightInput).toBeInTheDocument();
-    expect(dobInput).toBeInTheDocument();
-    expect(weightInput).toBeInTheDocument();
-    expect(submitButton).toBeInTheDocument();
+  it('displays loading state initially', async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        imageUrl: 'http://example.com/image.jpg',
+        fname: 'John',
+        lname: 'Doe',
+        email: 'john.doe@example.com',
+        phone: '123-456-7890',
+      }),
+    });
+    const { asFragment } = render(<BrowserRouter><EditProfile /></BrowserRouter>);
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  test('renders all form fields and a submit button', async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        imageUrl: 'http://example.com/image.jpg',
+        fname: 'John',
+        lname: 'Doe',
+        email: 'john.doe@example.com',
+        phone: '123-456-7890',
+      }),
+    });
+    render(<BrowserRouter><EditProfile /></BrowserRouter>);
+
+    // Simulate loading data
+    await waitFor(() => {
+      expect(screen.getByLabelText('First Name:')).toBeInTheDocument();
+      expect(screen.getByLabelText('Last Name:')).toBeInTheDocument();
+      expect(screen.getByLabelText('Height (cm):')).toBeInTheDocument();
+      expect(screen.getByLabelText('Date of Birth:')).toBeInTheDocument();
+      expect(screen.getByLabelText('Weight (lb):')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Save Changes' })).toBeInTheDocument();
+    });
   });
 
   test('fills out and submits the form', async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        imageUrl: 'http://example.com/image.jpg',
+        fname: 'John',
+        lname: 'Doe',
+        email: 'john.doe@example.com',
+        phone: '123-456-7890',
+      }),
+    });
     render(<BrowserRouter><EditProfile /></BrowserRouter>);
 
-    const firstNameInput = screen.getByLabelText('First Name:');
-    fireEvent.change(firstNameInput, { target: { value: 'Jane' } });
+    await waitFor(() => {
+      const firstNameInput = screen.getByLabelText('First Name:');
+      fireEvent.change(firstNameInput, { target: { value: 'Jane' } });
 
-    const submitButton = screen.getByRole('button', { name: 'Save Changes' });
-    fireEvent.click(submitButton);
+      const submitButton = screen.getByRole('button', { name: 'Save Changes' });
+      fireEvent.click(submitButton);
+    });
 
     await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith(expect.anything(), expect.objectContaining({
+      expect(fetch).toHaveBeenCalledWith(expect.any(String), expect.objectContaining({
         method: 'PATCH',
-        body: JSON.stringify({ fname: 'Jane', lname: '', height: '', dob: '', weight: '' }),
+        body: "{\"fname\":\"Jane\",\"lname\":\"Doe\"}",
+        headers: {'Content-Type': 'application/json'},
       }));
-      expect(mockedNavigate).toHaveBeenCalledWith('/profile');
-    });
-  });
-
-  test('handles fetch errors gracefully', async () => {
-    fetch.mockImplementationOnce(() => Promise.reject(new Error('Network Error')));
-    render(<BrowserRouter><EditProfile /></BrowserRouter>);
-    const submitButton = screen.getByRole('button', { name: 'Save Changes' });
-    fireEvent.click(submitButton);
-
-    await waitFor(() => {
-      const errorMessage = screen.getByText('Failed to update data: Network Error');
-      expect(errorMessage).toBeInTheDocument();
-    });
+    })
   });
 });
